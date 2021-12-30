@@ -1,0 +1,176 @@
+Procedure :
+
+1) Importing required libraries 
+
+--> numpy :
+
+-NumPy can be used to perform a wide variety of mathematical operations on arrays. It adds powerful data structures to Python that guarantee efficient calculations with arrays and matrices and it supplies an enormous library of high-level mathematical functions that operate on these arrays and matrices.
+
+--> pandas :
+
+-Pandas allows us to analyze big data and make conclusions based on statistical theories.
+-Pandas can clean messy data sets, and make them readable and relevant.
+-pandas is a software library written for the Python programming language for data manipulation and analysis. In particular, it offers data structures and operations for manipulating numerical tables and time series.
+
+--> plotly :
+
+-This can be a very helpful tool for data visualization and understanding the data simply and easily.
+-It can plot various types of graphs and charts like scatter plots, line charts, bar charts, box plots, histograms, pie charts, etc. 
+-Plotly has hover tool capabilities that allow us to detect any outliers or anomalies in a large number of data points.
+
+--> plotly.express :
+
+-Plotly Express is a built-in part of the plotly library, and is the recommended starting point for creating most common figures. 
+-Every Plotly Express function uses graph objects internally and returns a plotly.graph_objects.Figure instance
+-The plotly.express module (usually imported as px) contains functions that can create entire figures at once
+- Any figure created in a single function call with Plotly Express could be created using graph objects alone, but with between 5 and 100 times more code.
+
+--> plotly.graph_objects :
+
+-The plotly.graph_objects module (typically imported as go) contains an automatically-generated hierarchy of Python classes which represent non-leaf nodes in this figure schema. 
+- The term "graph objects" refers to instances of these classes.
+
+-https://www.geeksforgeeks.org/python-plotly-tutorial/
+
+--> When to use Graph Objects vs Plotly Express :
+
+-The recommended way to create figures is using the functions in the plotly.express module, collectively known as Plotly Express, which all return instances of plotly.graph_objects.Figure
+-certain kinds of figures are not yet possible to create with Plotly Express, such as figures that use certain 3D trace-types like mesh or isosurface.
+-certain figures are cumbersome to create by starting from a figure created with Plotly Express, for example figures with subplots of different types, dual-axis plots, or faceted plots with multiple different types of traces. 
+
+--> plotly.subplots.make_subplots :
+
+-Sometimes it is helpful to compare different views of data side by side.
+-subplots: groups of smaller axes that can exist together within a single figure
+-Figures with subplots are created using the make_subplots function from the plotly.subplots module.
+
+
+2) Importing the data :
+
+-using pd.read_csv() and converts into dataframes
+-df.head() -- used to read first 5 rows of the dataframe
+-removing unamed column
+
+3) Melting the data :
+
+-To make analysis of data in table easier, we can reshape the data into a more computer-friendly form using Pandas in Python
+-done using melt()
+-melt() function is useful to message a DataFrame into a format where one or more columns are identifier variables, while all other columns, considered measured variables, are unpivoted to the row axis
+	
+	df1 = pd.melt(df, id_vars='YEAR', value_vars=df.columns[1:])
+
+		id_vars[tuple, list, or ndarray, optional] : Column(s) to use as identifier variables. 
+		value_vars[tuple, list, or ndarray, optional]: Column(s) to unpivot. If not specified, uses all columns that are not set as id_vars. 
+
+4) Obtaining date attribute :
+
+-first obtaining data column -astype()-->used to cast a pandas object to a specified dtype
+-converting to date -strptime()--> method creates a datetime object from the given string.
+
+	The strptime() class method takes two arguments:
+		string (that be converted to datetime)
+		format code - %b--Abbreviated month name.
+				%Y--Year in four digits.
+
+-applying values in the column -apply()-->apply allow the users to pass a function and apply it on every single value of the Pandas series
+-appending the column -loc()-->allows to access a group of rows and columns by label(s) or a boolean array.
+
+
+5) Temperature through timeline :
+
+-changing columns names
+-sorting values by date
+-plotiing the values
+	
+	-->creates an empty figure.
+		-go.Figure()-layout attribute is for setting the layout for y-axis(in our code)
+	-->adding traces.
+		-A trace is just the name we give a collection of data and the specifications of which we want that data plotted
+		-New traces can be added to a graph object figure using the add_trace() method. This method accepts a graph object trace
+		-Each trace type has a graph object associated with it which can be added to the figure.
+		-This method accepts a graph object trace (an instance of go.Scatter, go.Bar, etc.) and adds it to the figure.
+		-The append_trace() method does the same thing, although it does not return the figure.
+		-This allows you to start with an empty figure, and add traces to it sequentially.
+		-->The nice thing about this structure is that we can iteratively modify our figure to get the desired result.
+	-->updating labels
+		-go.update_layout()
+	-->adding buttons
+		-the range slider is a custom range-type input control. 
+		-It allows selecting a value or a range of values between a specified minimum and maximum range
+		-range selector is a tool for selecting ranges to display within the chart.
+		-It provides buttons to select pre-configured ranges in the chart. 
+		-It also provides input boxes where the minimum and maximum dates can be manually input.
+		-https://www.geeksforgeeks.org/how-to-make-range-slider-and-selector-in-plotly/
+
+-getting some insights
+
+5) Warmest, Coldest and Median Montly temperature(Box plot)
+
+-Standard deviation tells you how spread out the data is. 
+-It is a measure of how far each observed value is from the mean.
+-Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out.
+-A standard deviation close to zero indicates that data points are close to the mean, whereas a high or low standard deviation indicates data points are respectively above or below the mean.
+-The standard deviation is used in conjunction with the mean to summarise continuous data, not categorical data.
+- the standard deviation, like the mean, is normally only appropriate when the continuous data is not significantly skewed or has outliers.
+-getting some insights
+
+6) Applying machine learning algorithms
+
+-find the best possible clusters for the given data
+-train the model
+-plot the values using temp_lables attribute
+-getting some insights
+
+7) Frequency chart of temperature readings
+
+-plotting the histogram
+
+	-The towers or bars of a histogram are called bins. 
+	-The height of each bin shows how many values from that data fall into that range.
+	-Width of each bin is = (max value of data – min value of data) / total number of bins.
+	-The default value of the number of bins to be created in a histogram is 10.
+
+	-The default mode is to represent the count of samples in each bin.
+	-With the histnorm argument, it is also possible to represent the percentage or fraction of samples in each bin (histnorm='percent' or probability),
+	-or a density histogram (the sum of all bar areas equals the total number of sample points, density),
+	-or a probability density histogram (the sum of all bar areas equals 1, probability density).
+
+-getting some insights
+
+8) yearly average temperature 
+
+-finding mean of year of original data(df) and appending to the dataframe
+
+	-"iloc" in pandas is used to select rows and columns by number, in the order that they appear in the data frame.
+	-You can imagine that each row has a row number from 0 to the total rows (data.shape[0]) and iloc[] allows selections based on these numbers.
+	-loc gets rows (and/or columns) with particular labels. iloc gets rows (and/or columns) at integer locations.
+
+-plotting in the graph
+-getting some insights
+-problems
+
+9) Monthly temperatures through history
+
+-Facet plots, also known as trellis plots or small multiples, are figures made up of multiple subplots which have the same set of axes, where each subplot shows a subset of the data.
+-facet_col (str or int or Series or array-like) –Values from this column or array_like are used to assign marks to facetted subplots in the horizontal direction.
+-facet_col_wrap (int) – Maximum number of facet columns.
+-appearing positive trend lines
+
+10) Seasonal weather analysis
+
+-using months columns in the original dataframe create and append the seasons to the original dataframe
+-using year and seasons create a new dataframe(seasonal_df)
+-rename the columns
+-melt the seasonal_df dataframe
+-rename the columns
+-plot the graph of 4 seasons
+
+-The trend line does not have a very high positive correlation with years but still it is not negligible.
+
+11) try to find out if we can get something out of an animation
+
+-animation_frame='Year'
+-On first look, we can see some fluctuations but that doesn’t give much of insights for us.
+-However, if we again see by arranging bar below to early years and late years we can notice the change.
+-But this is certainly not the best way to visualize it. Let’s find some better way.
+

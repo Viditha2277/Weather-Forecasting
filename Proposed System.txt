@@ -1,0 +1,119 @@
+I am using decision tree regressor for prediction as the data does not actually have a linear trend.
+
+DECISION TREE REGRESSOR
+
+--> sklearn.tree.DecisionTreeRegressor
+
+-Decision Tree is a decision-making tool that uses a flowchart-like tree structure or is a model of decisions and all of their possible results, including outcomes, input costs, and utility.
+-Decision-tree algorithm falls under the category of supervised learning algorithms. It works for both continuous as well as categorical output variables.
+-The branches/edges represent the result of the node and the nodes have either: 
+Conditions [Decision Nodes]
+Result [End Nodes]
+-The branches/edges represent the truth/falsity of the statement and take makes a decision based on that
+
+-Decision tree regression observes features of an object and trains a model in the structure of a tree to predict data in the future to produce meaningful continuous output.
+-Continuous output means that the output/result is not discrete, i.e., it is not represented just by a discrete, known set of numbers or values.
+
+-Discrete output example: A weather prediction model that predicts whether or not there’ll be rain on a particular day. 
+-Continuous output example: A profit prediction model that states the probable profit that can be generated from the sale of a product.
+
+Step 1: Import the required libraries. 
+Step 2: Initialize and print the Dataset.
+Step 3: Select all the rows and column 1 from the dataset to “X”.
+	X = dataset[:, 1:2].astype(int) 
+Step 4: Select all of the rows and column 2 from the dataset to “y”.
+	y = dataset[:, 2].astype(int) 
+Step 5: Fit decision tree regressor to the dataset
+
+	# import the regressor
+	from sklearn.tree import DecisionTreeRegressor
+
+	# create a regressor object
+	regressor = DecisionTreeRegressor(random_state = 0)
+
+	# fit the regressor with X and Y data
+	regressor.fit(X, y)
+
+Step 6: Predicting a new value
+	y_pred = regressor.predict([[3750]])
+Step 7: Visualising the result
+
+--> sklearn.model_selection.train_test_split
+
+-Scikit-learn provides a function, named train_test_split(), which automatically splits a dataset into a training and test set.
+-As input parameters of the function either lists or Pandas Dataframes can be passed.
+	test_size: the proportion of the dataset to be included in the test dataset.
+ 	random_state: the seed number to be passed to the shuffle operation, thus making the experiment reproducible.
+-three train/test splitting techniques, exploiting three different Python libraries:
+	scikit-learn
+	pandas
+	numPy
+
+--> sklearn.metrics.r2_score
+
+-Coefficient of determination also called as R2 score 
+-used to evaluate the performance of a linear regression model. 
+-It is the amount of the variation in the output dependent attribute which is predictable from the input independent variable(s).
+-It is used to check how well-observed results are reproduced by the model, depending on the ratio of total deviation of results described by the model.
+-R2= 1- SS(res) / SS(tot)
+	SS(res) is the sum of squares of the residual errors.
+	SS(tot) is the total sum of the errors.
+-0.12 or below indicate low, between 0.13 to 0.25 values indicate medium, 0.26 or above and above values indicate high effect size.
+-Best possible score is 1.0 and it can be negative (because the model can be arbitrarily worse). A constant model that always predicts the expected value of y, disregarding the input features, would get a  score of 0.0.
+
+
+PROCESS
+
+1) Preparing Data
+
+-copy year,month,value to another dataframe which are the variables we deal with
+-get dummy data for all the months for all the years
+	df2 = pd.get_dummies(df2)
+
+	pd.get_dummies()-It converts categorical data into dummy or indicator variables.
+
+-prepare the variables(x,y) for the model
+	x-year,months with dummy data
+	y-value(temperature)
+
+
+2) Model creation
+
+-creating a regressor object
+	regressor = DecisionTreeRegressor(random_state = 0)
+-preparing/splitting the data for training the model and for testing
+	train_x, test_x, train_y, test_y = train_test_split(x,y,test_size=0.3)
+-fitting the regressor object with training set	
+	dtr.fit(train_x, train_y)
+-predicting the values for test dataset
+	pred = dtr.predict(test_x)
+-evaluating performance of the model
+	r2_score(test_y, pred)
+
+-A high r2 value means that our predictive model is working good.
+
+
+3) Predicting the values of 2018
+
+-get year(2017),month from original dataset into new dataset
+	next_Year = df1[df1['YEAR']==2017][['YEAR', 'variable']]
+-replace 2017 with 2018
+	next_Year.YEAR.replace(2017,2018, inplace=True)
+-prepare dummies for the months in the new dataset
+	next_Year= pd.get_dummies(next_Year)
+-predict the values of 2018
+	temp_2018 = dtr.predict(next_Year)
+-converting the array into dictionary
+	temp_2018 = {'variable':df1['variable'].unique(), 'value':temp_2018}
+-converting dictionary to dataframe
+	temp_2018=pd.DataFrame(temp_2018)
+
+
+4) Plotting the values
+
+-conactinating the original dataset and 2018 set into new dataset
+	forecasted_temp = pd.concat([df1,temp_2018], sort=False).groupby(by='YEAR')['value'].mean().reset_index()
+-plotting the values
+-updating layout
+
+ 

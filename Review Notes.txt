@@ -1,0 +1,65 @@
+Abstract :
+
+-->Ancient weatherforecasting methods usually relied on observed patterns of events,also termed pattern recognition.For example,it might be observed that if the sun set was particularly red,the following day of then brought fair weather.However,not all of the predictions prove reliable.
+-->Weather forecasting system takes parameters such as temperature,humidity,and wind and will forecast weather based on previous record therefore this prediction will prove reliable
+-->This system can be used in AirTraffic,Marine,Agriculture,Forestry,Military,and Navy etc.
+
+Introduction :
+
+-->Weather forecasts are made by collecting as much data as possible about the current state of the atmosphere (particularly the temperature, humidity and wind) and using understanding of atmospheric processes (through meteorology) to determine how the atmosphere evolves in the future.
+-->However, the chaotic nature of the atmosphere and incomplete understanding of the processes mean that forecasts become less accurate as the range of the forecast increases.
+-->This can be done using machine learning.
+
+*2.1 TECHNOLOGY 
+
+-->get from other sites(Machine learning).
+-->A mathematical modeling technique used for simulating, explaining, and making predictions.
+
+*2.2 EXISTING SYSTEM
+
+-->using KMeans
+
+*2.3 PROPOSED SYSTEM
+
+-->using decision trees
+
+*2.4 METHODOLOGY
+
+-->The project mainly focuses on forecasting weather conditions using historical data.
+-->System will take current parameters present in the dataset (and will compare the parameters with the data in database) and will predict the Weather.
+-->The primary advantage of forecasting is that it provides the business with valuable information that the business can use to makedecisions about the future of the organization.
+-->We can divide our processin three modules namely:
+1)Data PreProcessing -- some matter
+2)Finding patterns -- decision tree process
+3)prediction -- predicting 2018 weather
+-->The outputis shown in the plots and also line graph that is plotted to show the predicted results.
+
+*2.7 DESIGN DESCRIPTION(Optional)
+
+-->something about the decision tree procedure in cleverprogrammer
+
+*3.4 HARDWARE AND SOFTWARE REQUIREMENTS
+
+HARDWARE:
+--Processor-Pentium–III
+--Speed-1.1GHz
+--RAM-256MB(min)
+--HardDisk-20GB
+--FloppyDrive-1.44MB
+--KeyBoard-StandardWindowsKeyboard
+--Mouse-TwoorThreeButtonMouse
+--Monitor-SVGA
+
+SOFTWARE:
+--OperatingSystem-Windows
+--Languages-Python
+--Datasets-kaggle
+--Environment-Google Colab
+
+Conclusion:
+
+-->Traditionally,weatherforecasting has alwaysbeen performed by physically simulating the atmosphere as a fluid and then the current state of the atmosphere would be sampled.
+-->In the previous system the future state of the atmosphere is computed by solving numerical equations of thermodynamics.
+-->Our proposed solution of using Machine learning for weather predicting is relatively robust to most atmospheric disturbances when compared to traditional methods.
+-->Another advantage of using machine learning is that it is not dependent on the physical laws of atmospheric processes.
+-->In the long run weather prediction using Machine Learning has a lot of advantages and thus it should be used globally.
